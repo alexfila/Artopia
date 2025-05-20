@@ -64,6 +64,7 @@ struct HomeView: View {
                             Button(action: {}) {
                                 Label("Add", systemImage: "plus")
                                     .bold()
+                                    .padding(.horizontal, 15)
                             }
                                 .buttonStyle(BloodButtonStyle())
                         }
