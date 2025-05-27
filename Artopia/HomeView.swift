@@ -61,12 +61,12 @@ struct HomeView: View {
                                 .font(.caption)
                                 .bold()
                                 .foregroundColor(.gray)
-                            Button(action: {}) {
+                            NavigationLink(destination: AddView()) {
                                 Label("Add", systemImage: "plus")
                                     .bold()
                                     .padding(.horizontal, 15)
                             }
-                                .buttonStyle(BloodButtonStyle())
+                            .buttonStyle(BloodButtonStyle())
                         }
                         .padding()
                         .frame(maxWidth: .infinity)
@@ -86,5 +86,3 @@ struct HomeView: View {
 }
 
 #Preview { HomeView() }
-
-
