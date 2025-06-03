@@ -12,40 +12,40 @@ struct HomeView: View {
                     .bold()
                 
                 VStack(spacing: 16) {
-                    Button(action: {}) {
-                        VStack(spacing: 20) {
-                            Image(systemName: "document.badge.plus.fill")
-                                .font(.largeTitle)
-                                .foregroundColor(.black)
-                                .padding(.bottom, 4)
-                            Text("Upload Your CBC Test")
-                                .font(.headline)
-                                .bold()
-                                .foregroundColor(.black)
-                            Text("Upload your test results or scan them directly")
-                                .font(.caption)
-                                .bold()
-                                .foregroundColor(.gray)
-                            HStack(spacing: 20) {
-                                Button(action: {}) {
-                                    Label("Upload", systemImage: "tray.and.arrow.up.fill")
-                                        .bold()
-                                        .padding(.horizontal, 15)
-                                }.buttonStyle(BloodButtonStyle())
-                                Button(action: {}) {
-                                    Label("Scan", systemImage: "camera.fill")
-                                        .bold()
-                                        .padding(.horizontal, 15)
-                                }
-                                .buttonStyle(BloodButtonStyle())
-                            }
-                        }
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.white)
-                        .cornerRadius(12)
-                        .shadow(radius: 1)
-                    }
+//                    Button(action: {}) {
+//                        VStack(spacing: 20) {
+//                            Image(systemName: "document.badge.plus.fill")
+//                                .font(.largeTitle)
+//                                .foregroundColor(.black)
+//                                .padding(.bottom, 4)
+//                            Text("Upload Your CBC Test")
+//                                .font(.headline)
+//                                .bold()
+//                                .foregroundColor(.black)
+//                            Text("Upload your test results or scan them directly")
+//                                .font(.caption)
+//                                .bold()
+//                                .foregroundColor(.gray)
+//                            HStack(spacing: 20) {
+//                                Button(action: {}) {
+//                                    Label("Upload", systemImage: "tray.and.arrow.up.fill")
+//                                        .bold()
+//                                        .padding(.horizontal, 15)
+//                                }.buttonStyle(BloodButtonStyle())
+//                                Button(action: {}) {
+//                                    Label("Scan", systemImage: "camera.fill")
+//                                        .bold()
+//                                        .padding(.horizontal, 15)
+//                                }
+//                                .buttonStyle(BloodButtonStyle())
+//                            }
+//                        }
+//                        .padding()
+//                        .frame(maxWidth: .infinity)
+//                        .background(Color.white)
+//                        .cornerRadius(12)
+//                        .shadow(radius: 1)
+//                    }
 
                     Button(action: {}) {
                         VStack(spacing: 20) {
