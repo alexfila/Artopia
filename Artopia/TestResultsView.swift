@@ -105,10 +105,10 @@ struct DetailedTestResultsView: View {
                         .font(.title)
                         .bold()
                     Text("Analysis of your blood test metrics and their status.")
-                        .font(.body)
-                    Text("Lab Name: Laboratorio Analisi Mediche San Giovanni (Italy)")
+                        .font(.title3)
+                        .bold()
                     Text("Test Date: May 12, 2025")
-                    Text("Test Type: Complete Blood Count (CBC)")
+                    
                 }
 
                 // Results

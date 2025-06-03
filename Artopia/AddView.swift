@@ -11,12 +11,19 @@ struct AddView: View {
     @State private var value: String = ""
     @State private var dateSelected = false
     @State private var biomarkerSelected = false
+    @State private var showValuesOptions = false
+    @State private var selectedValues: Set<String> = []
+    @State private var navigateToValuesView = false
+    // Computed property to check if all required fields are selected
+    private var isFormValid: Bool {
+        dateSelected && biomarkerSelected && !selectedValues.isEmpty
+    }
 
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 20) {
                 Text("Add Manually,")
-                    .font(.title)
+                    .font(.title2)
                     .bold()
                     .padding(.leading, 15)
 
@@ -75,16 +82,43 @@ struct AddView: View {
                                     .cornerRadius(8)
                                     .onTapGesture {
                                         biomarker = lab
-                                        showBiomarkerOptions = false
                                     }
                             }
                         }
                     }
                     Divider()
 
-                    TextField("Value", text: $value)
-                        .keyboardType(.decimalPad)
+                    Button(action: {
+                        withAnimation {
+                            showValuesOptions.toggle()
+                        }
+                    }) {
+                        HStack {
+                            Text("Values")
+                                .foregroundColor(.black)
+                            Spacer()
+                        }
                         .padding(.vertical, 10)
+                    }
+                    if showValuesOptions {
+                        ScrollView(.vertical) {
+                            VStack(alignment: .leading, spacing: 12) {
+                                Group {
+                                    Text("RBC PARAMETERS").font(.caption).foregroundColor(.gray)
+                                    valueHStack(["Hemoglobin", "RBC Count", "PCV", "MCV", "MCH", "MCHC", "RDW (CV)", "RDW-SD"])
+
+                                    Text("WBC PARAMETERS").font(.caption).foregroundColor(.gray)
+                                    valueHStack(["TLC"])
+
+                                    Text("DIFFERENTIAL LEUCOCYTE COUNT").font(.caption).foregroundColor(.gray)
+                                    valueHStack(["Neutrophils", "Lymphocytes", "Monocytes Eosinophils", "Eosinophils", "Basophils"])
+
+                                    Text("PLATELET PARAMETERS").font(.caption).foregroundColor(.gray)
+                                    valueHStack(["Platelet Count", "Mean Platelet Volume (MPV)"])
+                                }
+                            }
+                        }
+                    }
                     Divider()
                 }
                 .padding(.horizontal)
@@ -92,17 +126,23 @@ struct AddView: View {
                 Spacer()
 
                 Button(action: {
-                    // Save logic goes here
+                    navigateToValuesView = true
                 }) {
                     Text("Save & Continue")
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color(red: 0.6, green: 0.1, blue: 0.1))
+                        .background(isFormValid ? Color(red: 0.6, green: 0.1, blue: 0.1) : Color.gray)
                         .cornerRadius(16)
                 }
+                .disabled(!isFormValid)
                 .padding(.horizontal)
                 .padding(.bottom)
+                NavigationLink(
+                    destination: ValuesView(selectedParameters: selectedValues),
+                    isActive: $navigateToValuesView,
+                    label: { EmptyView() }
+                )
             }
             .padding()
             .background(Color.gray.opacity(0.1))
@@ -113,6 +153,31 @@ struct AddView: View {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         return formatter
+    }
+    
+    @ViewBuilder
+    private func valueHStack(_ items: [String]) -> some View {
+        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 8) {
+            ForEach(items, id: \.self) { item in
+                HStack {
+                    Text(item)
+                    Spacer()
+                    if selectedValues.contains(item) {
+                        Image(systemName: "checkmark")
+                    }
+                }
+                .padding()
+                .background(Color.gray.opacity(0.3))
+                .cornerRadius(8)
+                .onTapGesture {
+                    if selectedValues.contains(item) {
+                        selectedValues.remove(item)
+                    } else {
+                        selectedValues.insert(item)
+                    }
+                }
+            }
+        }
     }
 }
 
