@@ -6,17 +6,14 @@ import SwiftUI
 struct AddView: View {
     @State private var selectedDate = Date()
     @State private var showDatePicker = false
-    @State private var biomarker: String = "Lab1"
-    @State private var showBiomarkerOptions = false
     @State private var value: String = ""
     @State private var dateSelected = false
-    @State private var biomarkerSelected = false
     @State private var showValuesOptions = false
     @State private var selectedValues: Set<String> = []
     @State private var navigateToValuesView = false
     // Computed property to check if all required fields are selected
     private var isFormValid: Bool {
-        dateSelected && biomarkerSelected && !selectedValues.isEmpty
+        dateSelected && !selectedValues.isEmpty
     }
 
     var body: some View {
@@ -33,17 +30,18 @@ struct AddView: View {
                     Button(action: {
                         withAnimation {
                             showDatePicker.toggle()
-                            dateSelected = true
+                            dateSelected = showDatePicker
                         }
                     }) {
                         HStack {
                             Text("Date")
                                 .foregroundColor(.black)
                             Spacer()
-                            if dateSelected {
-                                Text("\(selectedDate, formatter: dateFormatter)")
-                                    .foregroundColor(.primary)
+                            Toggle(isOn: $dateSelected) {
+                                EmptyView()
                             }
+                            .labelsHidden()
+                            .disabled(true)
                         }
                         .padding(.vertical, 10)
                     }
@@ -58,43 +56,11 @@ struct AddView: View {
 
                     Button(action: {
                         withAnimation {
-                            showBiomarkerOptions.toggle()
-                            biomarkerSelected = true
-                        }
-                    }) {
-                        HStack {
-                            Text("Biomarker")
-                                .foregroundColor(.black)
-                            Spacer()
-                            if biomarkerSelected {
-                                Text(biomarker)
-                                    .foregroundColor(.primary)
-                            }
-                        }
-                        .padding(.vertical, 10)
-                    }
-                    if showBiomarkerOptions {
-                        HStack {
-                            ForEach(["Lab1", "Lab2", "Lab3"], id: \.self) { lab in
-                                Text(lab)
-                                    .padding()
-                                    .background(biomarker == lab ? Color.gray.opacity(0.5) : Color.gray.opacity(0.3))
-                                    .cornerRadius(8)
-                                    .onTapGesture {
-                                        biomarker = lab
-                                    }
-                            }
-                        }
-                    }
-                    Divider()
-
-                    Button(action: {
-                        withAnimation {
                             showValuesOptions.toggle()
                         }
                     }) {
                         HStack {
-                            Text("Values")
+                            Text("Biomarker")
                                 .foregroundColor(.black)
                             Spacer()
                         }
