@@ -26,176 +26,200 @@ struct ValuesView: View {
     @State private var plateletCount = ""
     @State private var mpv = ""
     
+    @State private var searchText = ""
+    
     var body: some View {
         NavigationView {
-            Form {
-                Section(header: Text("RBC PARAMETERS")
-                    .font(.headline)
-                    .foregroundColor(.primary)) {
+            ScrollView {
+                VStack(alignment: .leading) {
+                    TextField("🔍 Search", text: $searchText)
+                        .padding(10)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                        .overlay(
+                            HStack {
+                                Spacer()
+                                Image(systemName: "mic.fill")
+                                    .foregroundColor(.gray)
+                                    .padding(.trailing, 10)
+                            }
+                        )
                     
-                    HStack {
+                    Divider()
+                    
+                    Text("RBC PARAMETERS")
+                        .font(.headline)
+                        .foregroundColor(Color(red: 0.6, green: 0.1, blue: 0.1))
+                        .textCase(.uppercase)
+                        .padding(.top)
+                    
+                    VStack(alignment: .leading) {
                         Text("Hemoglobin")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("g/dL", text: $hemoglobin)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
                     }
+                    .padding(5)
                     
-                    HStack {
+                    VStack(alignment: .leading) {
                         Text("RBC Count")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("10^6/μl", text: $rbcCount)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
                     }
+                    .padding(5)
                     
-                    HStack {
+                    VStack(alignment: .leading) {
                         Text("PCV")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("%", text: $pcv)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
                     }
+                    .padding(5)
                     
-                    HStack {
+                    VStack(alignment: .leading) {
                         Text("MCV")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("fl", text: $mcv)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
                     }
+                    .padding(5)
                     
-                    HStack {
+                    VStack(alignment: .leading) {
                         Text("MCH")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("pg", text: $mch)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
                     }
+                    .padding(5)
                     
-                    HStack {
+                    VStack(alignment: .leading) {
                         Text("MCHC")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("g/dL", text: $mchc)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
                     }
+                    .padding(5)
                     
-                    HStack {
+                    VStack(alignment: .leading) {
                         Text("RDW (CV)")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("%", text: $rdwCV)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
                     }
+                    .padding(5)
                     
-                    HStack {
+                    VStack(alignment: .leading) {
                         Text("RDW-SD")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("fl", text: $rdwSD)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
                     }
-                }
-                
-                Section(header: Text("WBC PARAMETERS")
-                    .font(.headline)
-                    .foregroundColor(.primary)) {
+                    .padding(5)
                     
-                    HStack {
+                    Text("WBC PARAMETERS")
+                        .font(.headline)
+                        .foregroundColor(Color(red: 0.6, green: 0.1, blue: 0.1))
+                        .textCase(.uppercase)
+                        .padding(.top)
+                    
+                    VStack(alignment: .leading) {
                         Text("TLC")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("10^3/μl", text: $tlc)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
                     }
-                }
-                
-                Section(header: Text("DIFFERENTIAL LEUCOCYTE COUNT")
-                    .font(.headline)
-                    .foregroundColor(.primary)) {
+                    .padding(5)
                     
-                    HStack {
+                    Text("DIFFERENTIAL LEUCOCYTE COUNT")
+                        .font(.headline)
+                        .foregroundColor(Color(red: 0.6, green: 0.1, blue: 0.1))
+                        .textCase(.uppercase)
+                        .padding(.top)
+                    
+                    VStack(alignment: .leading) {
                         Text("Neutrophils")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("10^3/μl", text: $neutrophils)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
                     }
+                    .padding(5)
                     
-                    HStack {
+                    VStack(alignment: .leading) {
                         Text("Lymphocytes")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("10^3/μl", text: $lymphocytes)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
                     }
+                    .padding(5)
                     
-                    HStack {
+                    VStack(alignment: .leading) {
                         Text("Monocytes Eosinophils")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("10^3/μl", text: $monocytesEosinophils)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
                     }
+                    .padding(5)
                     
-                    HStack {
+                    VStack(alignment: .leading) {
                         Text("Eosinophils")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("10^3/μl", text: $eosinophils)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
                     }
+                    .padding(5)
                     
-                    HStack {
+                    VStack(alignment: .leading) {
                         Text("Basophils")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("10^3/μl", text: $basophils)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
                     }
-                }
-                
-                Section(header: Text("PLATELET PARAMETERS")
-                    .font(.headline)
-                    .foregroundColor(.primary)) {
+                    .padding(5)
                     
-                    HStack {
+                    Text("PLATELET PARAMETERS")
+                        .font(.headline)
+                        .foregroundColor(Color(red: 0.6, green: 0.1, blue: 0.1))
+                        .textCase(.uppercase)
+                        .padding(.top)
+                    
+                    VStack(alignment: .leading) {
                         Text("Platelet Count")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("10^3/μl", text: $plateletCount)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
                     }
+                    .padding(5)
                     
-                    HStack {
+                    VStack(alignment: .leading) {
                         Text("Mean Platelet Volume (MPV)")
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("fl", text: $mpv)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .frame(width: 100)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .padding(5)
+                }
+                .padding()
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Save") {
+                        saveValues()
+                        dismiss()
                     }
                 }
             }
-            .navigationTitle("Blood Test Parameters")
+            .navigationTitle("Biomarker")
             .navigationBarTitleDisplayMode(.inline)
         }
+    }
+    
+    @Environment(\.dismiss) private var dismiss
+
+    private func saveValues() {
+        // TODO: Implement saving logic
+        print("Saved values:")
+        print("Hemoglobin: \(hemoglobin), RBC Count: \(rbcCount), ...")
     }
 }
 
