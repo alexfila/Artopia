@@ -7,7 +7,7 @@ import SwiftUI
 struct ArtopiaApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
         }
     }
 }
